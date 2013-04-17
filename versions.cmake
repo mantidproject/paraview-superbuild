@@ -110,7 +110,7 @@ add_revision(osmesa
 
 add_revision(paraview
   GIT_REPOSITORY git://paraview.org/ParaView.git
-  GIT_TAG "master")
+  GIT_TAG "v3.98.1")
 
 if (TRUST_SVN_CERTIFICATES_AUTOMATICALLY)
   add_revision(diy
