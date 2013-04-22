@@ -33,6 +33,7 @@ add_external_project(paraview
     -DPARAVIEW_USE_VISITBRIDGE:BOOL=${visitbridge_ENABLED}
     -DVISIT_BUILD_READER_CGNS:BOOL=${cgns_ENABLED}
     -DVISIT_BUILD_READER_Silo:BOOL=${silo_ENABLED}
+    -DPARAVIEW_BUILD_PLUGIN_H5PartReader:BOOL=OFF
     -DVTK_USE_SYSTEM_HDF5:BOOL=${hdf5_ENABLED}
     # since VTK mangles all the following, I wonder if there's any point in
     # making it use system versions.
