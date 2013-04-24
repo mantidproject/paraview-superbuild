@@ -9,6 +9,7 @@ set (PARAVIEW_INSTALL_MANUAL_PDF TRUE)
 include(paraview.bundle.common)
 
 # set NSIS install specific stuff.
+set(CPACK_NSIS_MODIFY_PATH ON)
 
 # URL to website providing assistance in installing your application.
 set (CPACK_NSIS_HELP_LINK "http://paraview.org/Wiki/ParaView")
