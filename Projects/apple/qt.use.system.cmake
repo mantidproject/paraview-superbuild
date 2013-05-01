@@ -30,8 +30,8 @@ if (EXISTS "${QT_QMAKE_EXECUTABLE}")
           USE_SOURCE_PERMISSIONS
           COMPONENT Qt_Runtime
           # skip debug dylibs
-          FILES_MATCHING REGEX "^.*_debug*.dylib$" EXCLUDE
-          PATTERN "*.dylib")
+          FILES_MATCHING REGEX "^.*_debug.*$" EXCLUDE
+          PATTERN "*Qt*")
 
 install(DIRECTORY "${qt_bin_dir}/"
           DESTINATION "bin"
@@ -39,8 +39,8 @@ install(DIRECTORY "${qt_bin_dir}/"
           COMPONENT Qt_Runtime
 
           # skip debug dylibs
-          FILES_MATCHING REGEX "^.*debug*.dylib$" EXCLUDE
-          PATTERN "*.dylib")
+          FILES_MATCHING REGEX "^.*_debug.*$" EXCLUDE
+          PATTERN "*Qt*")
 
   install(DIRECTORY "${qt_lib_dir}/"
           DESTINATION "bin"
@@ -48,6 +48,6 @@ install(DIRECTORY "${qt_bin_dir}/"
           COMPONENT Qt_Runtime
 
           # skip debug dylibs
-          FILES_MATCHING REGEX "^.*debug*.dylib$" EXCLUDE
-          PATTERN "*.dylib")
+          FILES_MATCHING REGEX "^.*_debug.*" EXCLUDE
+          PATTERN "*Qt*")
 endif()
