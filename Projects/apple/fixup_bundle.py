@@ -90,6 +90,10 @@ class Library(object):
   @classmethod
   def createFromReference(cls, ref, exepath):
     path = ref.replace("@executable_path", exepath)
+    if "framework" in path:
+      path = os.path.join("/Library", "Frameworks", path)
+    if "libQtCLucene.4.dylib" == path:
+      path = os.path.join("/usr", "lib", path)
     if not os.path.exists(path):
       path = _find(ref)
     return cls.createFromPath(path)
@@ -177,8 +181,11 @@ if __name__ == "__main__":
   mLibraries = set()
   for lib in external_libraries.split():
     if not isexcluded(lib):
-      print "Processing ", lib
-      mLibraries.add(Library.createFromReference(lib, "%s/Contents/MacOS/foo" % App))
+      try:
+        print "Processing ", lib
+        mLibraries.add(Library.createFromReference(lib, "%s/Contents/MacOS/foo" % App))
+      except RuntimeError:
+        pass
 
   print "Found %d direct external dependencies." % len(mLibraries)
 
@@ -207,7 +214,10 @@ if __name__ == "__main__":
   install_name_tool_command = []
   for dep in mLibraries:
     old_id = dep.Id
-    dep.copyToApp(App)
+    fc = False
+    if "framework" in old_id:
+      fc = True
+    dep.copyToApp(App, fc)
     new_id = dep.Id
     install_name_tool_command += ["-change", '"%s"' % old_id, '"%s"' % new_id]
   print ""
