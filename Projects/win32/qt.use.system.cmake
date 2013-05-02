@@ -37,6 +37,12 @@ if (EXISTS "${QT_QMAKE_EXECUTABLE}")
           COMPONENT Qt_Runtime
 
           # skip debug dlls
-          FILES_MATCHING REGEX "^.*d4.dll$" EXCLUDE
-          REGEX "^(Qt).*.dll$")
+          FILES_MATCHING PATTERN ".dll"
+          REGEX "^.*d4.dll$" EXCLUDE
+          REGEX "^(?!Qt).*.dll$" EXCLUDE
+          REGEX "${qt_bin_dir}/mingw/*" EXCLUDE
+          REGEX "${qt_bin_dir}/Python27/*" EXCLUDE 
+          REGEX PATTERN ".git" EXCLUDE
+          REGEX PATTERN ".gitignore" EXCLUDE
+          )
 endif()
