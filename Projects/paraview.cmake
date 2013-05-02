@@ -49,4 +49,20 @@ add_external_project(paraview
   ${extra_cmake_args}
 
   LIST_SEPARATOR +
+  # Copy CompleteBundle as patch step
+  PATCH_COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${SuperBuild_PROJECTS_DIR}/patches/paraview.Applications.ParaView.CompleteBundle.cmake.in"
+                "<SOURCE_DIR>/Applications/ParaView/CompleteBundle.cmake.in"
 )
+
+#-------------------------------------------------------
+# To generate a standalone bundle the CMakeLists.txt for ParaView needs patching as well
+# You are only allowed a single PATCH_COMMAND though
+add_external_project_step(patch_pv_app_cmakelists
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+          "${SuperBuild_PROJECTS_DIR}/patches/paraview.Applications.ParaView.CMakeLists.txt"
+          "<SOURCE_DIR>/Applications/ParaView/CMakeLists.txt"
+DEPENDEES update # do after update
+DEPENDERS patch  # do before patch
+)
+
