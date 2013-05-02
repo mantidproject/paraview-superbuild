@@ -38,5 +38,5 @@ if (EXISTS "${QT_QMAKE_EXECUTABLE}")
 
           # skip debug dlls
           FILES_MATCHING REGEX "^.*d4.dll$" EXCLUDE
-          PATTERN "Qt*.dll")
+          REGEX "^(Qt).*.dll$")
 endif()
