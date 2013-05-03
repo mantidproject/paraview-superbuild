@@ -35,13 +35,12 @@ if (EXISTS "${QT_QMAKE_EXECUTABLE}")
           DESTINATION "bin"
           USE_SOURCE_PERMISSIONS
           COMPONENT Qt_Runtime
-          FILES_MATCHING REGEX "^(Qt).*.dll$" 
-		  # skip debug dlls
-          REGEX "^.*d4.dll$" EXCLUDE
-		  # skip subdirectories
+
+          # skip debug dlls
+          FILES_MATCHING REGEX "Qt.*\\.dll"
+		  REGEX "^.*d4.dll$" EXCLUDE
 		  REGEX "${qt_bin_dir}/Python27/*" EXCLUDE 
-          REGEX "${qt_bin_dir}/mingw/*" EXCLUDE 
-		  REGEX "${qt_bin_dir}/.git/*" EXCLUDE 
-		  REGEX "${qt_bin_dir}/qt_plugins/*" EXCLUDE 
-          )
+		  REGEX "${qt_bin_dir}/mingw/*" EXCLUDE 
+		  REGEX "${qt_bin_dir}/\\.git/*" EXCLUDE 
+		  )
 endif()
